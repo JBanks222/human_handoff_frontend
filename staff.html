@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1d3a6e">
+    <title>Staff Console</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="config.js" defer></script>
+    <script src="api.js" defer></script>
+    <script src="staff.js" defer></script>
+  </head>
+  <body class="staff-page">
+    <header class="staff-header">
+      <a class="staff-brand" href="staff.html" aria-label="QCC IT Help Desk staff console">
+        <span class="brand-mark" aria-hidden="true">Q</span>
+        <span><strong>QCC IT Help Desk</strong><small>Staff console</small></span>
+      </a>
+      <div class="staff-header-actions">
+        <span class="staff-identity">Signed in as <strong id="staff-name-display"></strong></span>
+        <button class="text-button" id="change-name" type="button">Change</button>
+        <button class="button button-outline notification-button" id="notification-permission" type="button">Enable notifications</button>
+      </div>
+    </header>
+
+    <main class="staff-workspace">
+      <aside class="queue-panel" aria-labelledby="queue-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Live support</p>
+            <h1 id="queue-title">Waiting queue <span class="count-badge" id="waiting-count">0</span></h1>
+          </div>
+          <span class="live-indicator"><i></i> Live</span>
+        </div>
+        <p class="queue-summary" id="queue-summary">Loading requests...</p>
+        <ul class="queue-list" id="queue-list" aria-label="Support queue" aria-live="polite"></ul>
+      </aside>
+
+      <section class="conversation-panel" aria-labelledby="conversation-title">
+        <div class="conversation-empty" id="conversation-empty">
+          <div class="empty-mark" aria-hidden="true">Q</div>
+          <h2 id="conversation-title">Select a conversation</h2>
+          <p>Student requests will appear in the queue.</p>
+        </div>
+        <div class="conversation-active" id="conversation-active" hidden>
+          <header class="conversation-header">
+            <div class="conversation-title-wrap">
+              <p class="eyebrow">Student conversation</p>
+              <h2 id="active-session-title">Conversation</h2>
+            </div>
+            <button class="button button-danger-outline" id="end-chat" type="button">End chat</button>
+          </header>
+          <div class="session-details" id="session-details"></div>
+          <ol class="message-list staff-messages" id="transcript" aria-live="polite" aria-relevant="additions text" aria-label="Conversation transcript"></ol>
+          <form class="composer staff-composer" id="reply-form">
+            <label class="visually-hidden" for="reply-input">Reply to student</label>
+            <textarea id="reply-input" name="message" rows="2" maxlength="4000" placeholder="Write a reply... (Enter to send, Shift+Enter for a new line)" required></textarea>
+            <button class="button button-primary send-button" type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="name-dialog" id="name-dialog" aria-labelledby="name-dialog-title">
+      <form id="name-form" method="dialog">
+        <p class="eyebrow">Staff profile</p>
+        <h2 id="name-dialog-title">What should students see?</h2>
+        <label for="staff-name-input">Your display name</label>
+        <input id="staff-name-input" name="staffName" maxlength="80" autocomplete="name" required>
+        <div class="dialog-actions">
+          <button class="button button-primary" type="submit">Save name</button>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="alert" hidden></div>
+  </body>
+</html>
